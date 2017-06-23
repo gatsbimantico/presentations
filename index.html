@@ -1,0 +1,184 @@
+<html>
+	<head>
+        <base href="./">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/moon.css">
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+
+				<section>
+
+                    <h1>State of JS<h1>
+                    <h3>Object Oriented<br>Reactive<br>Isomorphic</h3>
+
+                </section>
+
+
+				<section>
+
+                    <section>
+
+                        <p>Expanding the...</p>
+                        <h2>Object Oriented Programing</h2><h3>side of the JS</h3>
+
+                    </section>
+
+                    <section>
+                        <h3>Classes</h3>
+                        <pre><code>
+    class Example extends ExampleParent {
+
+        constructor () {
+
+            super();
+
+            this.proterty = "regular prototype property";
+
+        }
+
+    }
+                        </code></pre>
+                        <p>Replacement for the <strong><em>ES5</em></strong> prototype pattern</p>
+                    </section>
+
+                    <section>
+                        <h3>Getters / Setters</h3>
+                        <pre><code>
+    class Example {
+
+        get property () {
+
+            return 1 + 1;
+        }
+
+        set property (value) {
+
+            console.log(value, "must be a number");
+        }
+    }
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h3>New Types</h3>
+                        <h5>
+                            Set<br>
+                            Map<br><br>
+                            WeakSet<br>
+                            WeakMap<br><br>
+                            Iterator<br>
+                            Generator<br>
+                        </h5>
+                            
+                    </section>
+
+                </section>
+
+                <section>
+
+                    <section>
+
+                        <h2>Reactive Programing</h2>
+                        <p class="fragment">...or asyncronous data streaming</p>
+
+                    </section>
+
+                    <section>
+
+                        <h3>The old know approach:</h3>
+                        <p>Element.onmessage</p>
+                        <div class="fragment" style="text-align: left; padding-left: 20vh;">
+                            <p>- <strong>&lt;iframe&gt;</strong> HTML tag</p>
+                            <p>- <strong>Worker</strong> API object</p>
+                            <p>- <strong>WebSocket</strong> API object</p>
+                        </div>
+
+                    </section>
+
+                    <section>
+
+                        <h3>The Reactive way</h3>
+                        <h4>
+                            Observe<br>
+                            Filter<br>
+                            Emit
+                        </h4>
+
+                    </section>
+
+                </section>
+
+                <section>
+
+                    <section>
+
+                        <h2>Isomorphic</h2>
+                        <img src="img/javascript-everywhere.jpg" />
+
+                    </section>
+
+                    <section>
+
+                        <h3>Advantages</h3>
+                        <h4>
+                            SEO<br>
+                            Performance<br>
+                            Maintenance
+                        </h4>
+
+                    </section>
+
+                    <section>
+
+                        <h3>How to</h3>
+                        <h4>Server side</h4>
+                        <p>Babel command line</p>
+                        <h4>Client side</h4>
+                        <p>Webpack + Babel</p>
+                        <a href="https://github.com/DavidWells/isomorphic-react-example">+ info</a>
+
+                    </section>
+
+                    <section>
+
+                        <h3>Frameworks</h3>
+                        <h4>
+                            Meteor<br>
+                            Rendr<br>
+                            React
+                        </h4>
+
+                    </section>
+
+                </section>
+
+                <section>
+
+                    <h1>Thank you!</h1>
+                    <h3>Q&A</h3>
+
+                </section>
+
+
+			</div>
+		</div>
+		<script src="js/reveal.js"></script>
+        <script type="application/javascript">
+            function onHighlightLoad () {
+                hljs.initHighlightingOnLoad();
+            }
+        </script>
+		<script src="plugin/highlight/highlight.js" onload="onHighlightLoad();"></script>
+		<script>
+			Reveal.initialize({
+                markdown: {
+                    smartypants: true
+                }
+            });
+		</script>
+	</body>
+</html>
