@@ -179,6 +179,15 @@
                     smartypants: true
                 }
             });
+window.Presentation = {
+get highlightLoad() { window.dispatchEvent(new CustomEvent('highlight-loaded')); },
+init: function () { hljs.initHighlightingOnLoad(); Reveal.initialize({
+                markdown: {
+                    smartypants: true
+                }
+            });
+}
+};
 		</script>
 	</body>
 </html>
