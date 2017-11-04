@@ -167,27 +167,40 @@
 			</div>
 		</div>
 		<script src="js/reveal.js"></script>
-        <script type="application/javascript">
-            function onHighlightLoad () {
-                hljs.initHighlightingOnLoad();
-            }
-        </script>
-		<script src="plugin/highlight/highlight.js" onload="onHighlightLoad();"></script>
-		<script>
-			Reveal.initialize({
-                markdown: {
-                    smartypants: true
-                }
-            });
-window.Presentation = {
-get highlightLoad() { window.dispatchEvent(new CustomEvent('highlight-loaded')); },
-init: function () { hljs.initHighlightingOnLoad(); Reveal.initialize({
-                markdown: {
-                    smartypants: true
-                }
-            });
-}
-};
+   <script type="application/javascript">
+     window.Presentation = {
+       get highlightLoad() {
+
+         window.dispatchEvent(new CustomEvent('highlight-loaded'));
+
+       },
+       init: function () {
+
+         hljs.initHighlightingOnLoad();
+         Reveal.initialize({
+           markdown: {
+             smartypants: true
+           }
+         });
+
+       }
+     };
+
+     Promise.all([
+       new Promise(function (resolve) {
+
+         window.addEventListener(
+           'highlight-loaded',
+           function(){ resolve(); }
+         );
+
+       })
+     ]).then(function () {
+
+       Presentation.init();
+
+     });
 		</script>
+   <script src="plugin/highlight/highlight.js" onload="Presentation.highlightLoad;"></script>
 	</body>
 </html>
