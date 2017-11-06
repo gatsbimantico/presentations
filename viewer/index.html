@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <base href="../">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/moon.css">
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides"></div>
+    </div>
+    <script src="js/reveal.js"></script>
+    <script type="application/javascript">
+      window.Presentation = {
+        get highlightLoad() {
+
+          window.dispatchEvent(new CustomEvent('highlight-loaded'));
+
+        },
+        queryTemplate: function () {
+
+          var templateHash = location.hash.replace('#','');
+
+          return window.fetch(`../slides/${templateHash}.html`)
+            .then(function (response) {
+
+              return response.text();
+
+            });
+        },
+        init: function (slide) {
+
+          document.querySelector('.slides').innerHTML = slide;
+          hljs.initHighlightingOnLoad();
+          Reveal.initialize({ markdown: { smartypants: true } });
+
+        }
+      };
+
+      Promise.all([
+        Presentation.queryTemplate(),
+        new Promise(function (resolve) {
+
+          window.addEventListener(
+            'highlight-loaded',
+            function(){ resolve(); }
+          );
+
+        })
+      ]).then(function (args) {
+
+        Presentation.init(args[0]);
+
+      });
+
+      Presentation.loadTemplate();
+    </script>
+    <script
+      src="plugin/highlight/highlight.js"
+      onload="Presentation.highlightLoad"
+    ></script>
+  </body>
+</html>
