@@ -1,0 +1,164 @@
+<section>
+    <h1>PWA: JS Mobile APIs</h1>
+</section>
+
+<section>
+    <h2>Progressive Web Apps</h2>
+    <p>Responsive Design
+        <br>+ Mobile First
+        <br>+ Browser APIs</p>
+    <h3>LINKABLE & INDEPENDENT</h3>
+    <h3>FAST & SAFE</h3>
+    <h3>ENGAGING</h3>
+</section>
+
+<section>
+    <h2>Hello,
+        <br> are you a PWA?</h2>
+    <h4>
+        <code>&lt;meta&gt;</code>
+    </h4>
+
+    <p>apple-mobile-web-app-capable,
+        <br> mobile-web-app-capable</p>
+
+    <h4>
+        <code>&lt;link&gt;</code>
+    </h4>
+    <p>manifest with href</p>
+
+</section>
+
+<section>
+    <h2>manifest.json</h2>
+
+    <section>
+        <h3>Required</h3>
+        <p>name, short_name, author, version, manifest_version, icons (144x144 png), start_url</p>
+    </section>
+
+    <section>
+        <h3>Recommended</h3>
+        <p>description, default_locale</p>
+    </section>
+
+    <section>
+        <h3>The permissions</h3>
+        <p>alarms, bookmarks, cookies, downloads, history, notifications, sessions, storage</p>
+    </section>
+</section>
+
+<!-- <section>
+    <div class="img" style="background-image:url(/images/install-banner.png);"></div>
+</section> -->
+
+<section>
+    <h2>Native Style</h2>
+
+    <section>
+        <h3>Colors</h3>
+        <h4>
+            <code>&lt;meta&gt;</code>
+        </h4>
+        <p>theme-color, msapplication-navbutton-color, msapplication-TileColor, apple-mobile-web-app-status-bar-style</p>
+    </section>
+
+    <section>
+        <h3>Icons</h3>
+        <h4>
+            <code>&lt;link&gt;</code>
+        </h4>
+        <p>shortcut icon, apple-touch-icon-precomposed</p>
+        <h4>
+            <code>&lt;meta&gt;</code>
+        </h4>
+        <p>msapplication-TileImage, msapplication-square70x70logo, msapplication-square150x150logo, msapplication-wide310x150logo,
+            msapplication-square310x310logo
+        </p>
+    </section>
+
+</section>
+
+<!-- <section>
+    <div class="img" style="background-image:url(/images/twitter.png);" title="Twitter"></div>
+    <div class="img" style="background-image:url(/images/aliexpress.png);" title="AliExpress"></div>
+    <div class="img" style="background-image:url(/images/flipboard.png);" title="Flipboard"></div>
+    <div class="img" style="background-image:url(/images/telegram.svg);" title="Telegram"></div>
+</section>
+
+<section>
+    <div class="img" style="background-image:url(/images/tribal.png);"></div>
+</section> -->
+
+<section>
+    <button onclick="notify()">Notify</button>
+</section>
+
+<section>
+    <button onclick="geolocation">Geolocation</button>
+    <p>
+        latitude: {{lat}}
+        <br> longitude: {{lon}}
+    </p>
+    <button onclick="orientation">Orientation</button>
+    <div style="text-align: center;">
+        <svg height="100" width="320" style="border: 1px solid black;">
+            <circle cx$="{{cx}}" cy$="{{cy}}" r="10" stroke="black" stroke-width="1" fill="crimson" />
+        </svg>
+    </div>
+    <button onclick="video">Media Capture and Streams</button>
+    <video style="width: 100%; max-height: 300px;"></video>
+
+</section>
+
+<section>
+    <button onclick="vibration">Vibration</button>
+    <button onclick="ambient">Ambient</button>
+    <p>
+        lightLevel: {{lightLevel}}
+    </p>
+    <button onclick="proximity">Proximity</button>
+    <p>
+        proximity.max: {{proximityMax}}
+        <br> proximity.min: {{proximityMin}}
+        <br> proximity: {{proximityValue}}
+    </p>
+    <button onclick="battery">Battery</button>
+    <p>
+        battery.level: {{battery.level}}
+        <br> battery.charging: {{battery.charging}}
+        <br> battery.chargingTime: {{battery.chargingTime}}
+        <br> battery.dischargingTime: {{battery.dischargingTime}}
+    </p>
+</section>
+
+<section>
+    <h2>WebVR</h2>
+    <p>Virtual Realiity
+        <br>Now in your browser</p>
+    <h3>Three.js</h3>
+    <p>3D Modeling with JS</p>
+    <h3>iFrame</h3>
+    <p>3D HTML components</p>
+</section>
+
+<section>
+    <pre><code>
+    &lt;a-scene&gt;
+        &lt;a-box position="-1 0.5 -3" rotation="0 45 0"
+            color="#4CC3D9"&gt;&lt;/a-box&gt;
+        &lt;a-sphere position="0 1.25 -5" radius="1.25"
+            color="#EF2D5E"&gt;&lt;/a-sphere&gt;
+        &lt;a-cylinder position="1 0.75 -3" radius="0.5"
+            height="1.5" color="#FFC65D"&gt;
+        &lt;/a-cylinder&gt;
+        &lt;a-plane position="0 0 -4" rotation="-90 0 0"
+            width="4" height="4" color="#7BC8A4"&gt;
+        &lt;/a-plane&gt;
+        &lt;a-sky color="#ECECEC"&gt;&lt;/a-sky&gt;
+    &lt;/a-scene&gt;
+    </code></pre>
+    <p><button class="next" onclick="goToGame">Demo Game</button></p>
+</section>
+
+<script src="/slides/pwa.js"></script>

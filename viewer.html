@@ -39,7 +39,24 @@
       },
       init: function (slide) {
 
-        document.querySelector('.slides').innerHTML = slide;
+        var script,
+          slideScript;
+
+        slideScript = (/<script src\=\"([^\"]*)\"><\/script>/g).exec(slide);
+
+        if (slideScript) {
+
+          script = document.createElement('script');
+          script.src = slideScript[1];
+          document.querySelector('.slides').innerHTML = slide.replace(slideScript[0], '');
+          document.querySelector('.slides').appendChild(script);
+
+        } else {
+
+          document.querySelector('.slides').innerHTML = slide;
+
+        }
+
         hljs.initHighlightingOnLoad();
         Reveal.initialize({ markdown: { smartypants: true } });
 
