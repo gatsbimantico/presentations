@@ -1,63 +1,83 @@
 <html>
-  <head>
-    <base href="./">
-    <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/moon.css">
-    <link rel="stylesheet" href="lib/css/zenburn.css">
-  </head>
-  <body>
-    <div class="reveal">
-      <div class="slides"></div>
-    </div>
-    <script src="js/reveal.js"></script>
-    <script type="application/javascript">
-      window.Presentation = {
-        get highlightLoad() {
 
-          window.dispatchEvent(new CustomEvent('highlight-loaded'));
+<head>
+  <base href="./">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/moon.css">
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+</head>
 
-        },
-        queryTemplate: function () {
+<body>
+  <div class="reveal">
+    <div class="slides"></div>
+  </div>
+  <script src="js/reveal.js"></script>
+  <script type="application/javascript">
+    window.Presentation = {
+      get highlightLoad() {
 
-          var templateHash = location.hash.replace('#','');
+        window.dispatchEvent(new CustomEvent('highlight-loaded'));
 
-          return window.fetch(`./slides/${templateHash}.html`)
-            .then(function (response) {
+      },
+      queryTemplate: function () {
 
-              return response.text();
+        var templateHash = location.hash.replace(/^#/, ''),
+          templatePath = `./slides/${templateHash}.html`;
 
-            });
-        },
-        init: function (slide) {
+        if (templateHash.match(/^http/)) {
 
-          document.querySelector('.slides').innerHTML = slide;
-          hljs.initHighlightingOnLoad();
-          Reveal.initialize({ markdown: { smartypants: true } });
+          templatePath = decodeURIComponent(templateHash);
 
         }
-      };
+
+        return window.fetch(templatePath)
+          .then(function (response) {
+
+            return response.text();
+
+          });
+      },
+      init: function (slide) {
+
+        document.querySelector('.slides').innerHTML = slide;
+        hljs.initHighlightingOnLoad();
+        Reveal.initialize({ markdown: { smartypants: true } });
+
+      }
+    };
+
+    Promise.all([
+      Presentation.queryTemplate(),
+      new Promise(function (resolve) {
+
+        window.addEventListener(
+          'highlight-loaded',
+          function () { resolve(); }
+        );
+
+      })
+    ]).then(function (args) {
+
+      Presentation.init(args[0]);
+
+    });
+
+    window.addEventListener("hashchange", function () {
 
       Promise.all([
-        Presentation.queryTemplate(),
-        new Promise(function (resolve) {
-
-          window.addEventListener(
-            'highlight-loaded',
-            function(){ resolve(); }
-          );
-
-        })
+        Presentation.queryTemplate()
       ]).then(function (args) {
 
-        Presentation.init(args[0]);
+        location.reload();
 
       });
 
-      Presentation.loadTemplate();
-    </script>
-    <script
-      src="plugin/highlight/highlight.js"
-      onload="Presentation.highlightLoad"
-    ></script>
-  </body>
+    });
+  </script>
+  <script
+    src="plugin/highlight/highlight.js"
+    onload="Presentation.highlightLoad"
+  ></script>
+</body>
+
 </html>
