@@ -1,5 +1,7 @@
 # PRESENTATIONS
 
+> A template-based slides viewer for Reveal.js
+
 This repo makes use of
 https://github.com/hakimel/reveal.js/
 to generate presentations.
