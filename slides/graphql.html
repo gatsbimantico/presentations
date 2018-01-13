@@ -1,0 +1,34 @@
+<section data-background-image="http://graphql.org/img/logo-gray.svg" data-background-size="60% 30%" data-background-position="center 5%">
+    <h1>GraphQL</h1>
+</section>
+
+<section>
+    <h2>A Graph Query Language</h2>
+    <p>Making the Front End dumb by improving the queries</p>
+</section>
+
+<section>
+    <p>A GraphQL query asks the API for an specific structure</p>
+
+    <pre><code>graphqlHTTP ({
+    schema: buildSchema(`
+        type Query {
+            callback(numOne: Int!, numTwo: Int): Int
+        }
+    `),
+    rootValue: {
+        callback: function ({numOne, numTwo}) {
+            return numOne + numTwo;
+        }
+    },
+    graphiql: true,
+})</code></pre>
+</section>
+
+<section>
+    <iframe src="http://graphql.org/swapi-graphql" style="width:calc(100% - 50px); height:calc(100% - 40px);"></iframe>
+</section>
+
+<section>
+    https://github.com/Jahia/graphql-core
+</section>
