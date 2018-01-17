@@ -1,34 +1,193 @@
-<section data-background-image="http://graphql.org/img/logo-gray.svg" data-background-size="60% 30%" data-background-position="center 5%">
-    <h1>GraphQL</h1>
+<section>
+
+    <section data-background-image="http://graphql.org/img/logo-gray.svg" data-background-size="60% 30%" data-background-position="center 5%">
+        <h1>GraphQL</h1>
+        <p class="fragment">Less logic, better queries</p>
+    </section>
+
+
+    <section>
+        <h2>Wasn't REST enought?</h2>
+        <style>
+            .reveal .small {
+                font-size: .5em;
+            }
+        </style>
+        <ul>
+            <li class="fragment">FE agnostic <span class="small">(FE forces the BE to couple with FE needs)<span></span></li>
+            <li class="fragment">Lacks of a standard to use params</li>
+        </ul>
+    </section>
+
 </section>
 
+
 <section>
-    <h2>A Graph Query Language</h2>
-    <p>Making the Front End dumb by improving the queries</p>
+
+    <section>
+        <h2>Benefits from using a GraphQL API</h2>
+        <ul>
+            <li>DEVELOPMENT TIME:<br><span class="small">Team doesn't need to wait ones for the others</span></li>
+            <li>CODE DEVELOPMENT:<br><span class="small">No needs for checks of the structure, transformations,...</span></li>
+            <li>DATA, SPEED & SECURITY:<br><span class="small">The result contains only the information required</span></li>
+        </ul>
+    </section>
+
+
+    <section>
+        <iframe src="http://graphql.org/swapi-graphql/?query=%7B%0A%20%20allFilms%20%7B%0A%20%20%20%20edges%20%7B%0A%20%20%20%20%20%20node%20%7B%0A%20%20%20%20%20%20%20%20id%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A" style="width:calc(100% - 50px); height:calc(100% - 40px);"></iframe>
+    </section>
+
+
+    <section>
+        <iframe src="http://graphql.org/swapi-graphql/?query=fragment%20film_list_info%20on%20Film%20%7B%0A%09%09id%0A%20%20%20%20enlgishName%3A%20title%0A%7D%0A%0Afragment%20film_detail_info%20on%20Film%20%7B%0A%20%20%09...film_list_info%0A%20%20%20%20releaseDate%0A%20%20%20%20episodeNumber%3A%20episodeID%0A%20%20%20%20director%0A%7D%0A%0A%7B%0A%20%20%0A%20%20%20%20films_list%3A%20allFilms%20%7B%0A%20%20%20%20%20%20totalCount%0A%20%20%20%20%20%20films%20%7B%0A%20%20%20%20%20%20%20%20...film_list_info%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%0A%0A%0A%20%20%20%20film_detail%3A%20film(id%3A%20%22ZmlsbXM6MQ%3D%3D%22)%20%7B%0A%20%20%20%20%20%20...film_detail_info%0A%20%20%20%20%7D%0A%0A%7D%0A" style="width:calc(100% - 50px); height:calc(100% - 40px);"></iframe>
+    </section>
+
 </section>
 
-<section>
-    <p>A GraphQL query asks the API for an specific structure</p>
 
-    <pre><code>graphqlHTTP ({
-    schema: buildSchema(`
-        type Query {
-            callback(numOne: Int!, numTwo: Int): Int
+<section>
+
+    <section>
+        <h2>Client Side Implementations</h2>
+        <a href="https://github.com/graphql/graphql-js">github: graphql/graphql-js</a>
+    </section>
+
+
+    <section>
+        <h3>Schema Definition</h3>
+
+        <pre><code class="js">var schema = buildSchema(`
+    type RandomDie {
+        numSides: Int!
+    }
+`);
+class RandomDie {
+    constructor(numSides) {
+        this.numSides = numSides;
+    }
+}</code></pre>
+    </section>
+
+
+    <section>
+        <h3>GET-ish: Query</h3>
+        <p>This GraphQL query example asks the API for an specific structure and allows to set callbacks to be executed to transform the data</p>
+
+        <pre><code class="js">var schema = buildSchema(`
+    type Query {
+        callback(numOne: Int!, numTwo: Int): Int
+    }
+`);
+function callback ({numOne, numTwo}) {
+    return numOne + numTwo;
+}</code></pre>
+    </section>
+
+
+    <section>
+        <h3>POST-ish: Mutation</h3>
+        <p>This GraphQL mutation example PUTs a new message in the DB and asks for the id</p>
+
+        <pre><code class="js">var query = `mutation CreateMessage($input: MessageInput) {
+    createMessage(input: $input) {
+        id
+    }
+}`;
+xhr.send(JSON.stringify({
+    query: query,
+    variables: {
+        input: {
+            author: author,
+            content: content,
         }
-    `),
-    rootValue: {
-        callback: function ({numOne, numTwo}) {
-            return numOne + numTwo;
-        }
-    },
-    graphiql: true,
-})</code></pre>
+    }
+}));</code></pre>
+    </section>
+
 </section>
 
-<section>
-    <iframe src="http://graphql.org/swapi-graphql" style="width:calc(100% - 50px); height:calc(100% - 40px);"></iframe>
-</section>
 
 <section>
-    https://github.com/Jahia/graphql-core
+
+    <section>
+        <h2>Server Side Implementations</h2>
+        <a href="https://github.com/graphql-java/graphql-java">github: graphql-java/graphql-java</a><br>
+        <a href="https://github.com/Jahia/graphql-core">github: Jahia/graphql-core</a>
+    </section>
+
+
+    <section>
+        <h3>SErver Definition</h3>
+        <pre><code class="java">@WebServlet(urlPatterns = "/graphql")
+public class GraphQLEndpoint extends SimpleGraphQLServlet {
+    public GraphQLEndpoint() {
+        super(buildSchema());
+    }
+    private static GraphQLSchema buildSchema() {
+        LinkRepository linkRepository = new LinkRepository();
+        return SchemaParser.newParser()
+                .file("schema.graphqls")
+                .resolvers(new Query(linkRepository))
+                .build()
+                .makeExecutableSchema();
+    }
+}</code></pre>
+    </section>
+
+
+    <section>
+        <h3>Schema Definition</h3>
+        <p>Schema Definition Language (SDL)</p>
+        <pre><code>type Link {
+    url: String!
+    description: String!
+}</code></pre>
+        <p>or Programatically</p>
+        <pre><code class="java">GraphQLObjectType fooType = newObject()
+    .name("Foo")
+    .field(newFieldDefinition()
+    .name("bar")
+    .type(GraphQLString))
+    .build();</code></pre>
+    </section>
+
+
+    <section>
+        <h3>GET-ish: Query</h3>
+        <p>A POJO (containing no behavior)</p>
+        <pre><code class="java">public class RandomDie {
+    private final String url;
+    public RandomDie(Integer numSides) {
+        this.numSides = numSides;
+    }
+    public Integer getNumSides() {
+        return this.numSides;
+    }
+}</code></pre>
+    </section>
+
+
+    <section>
+        <h3>POST-ish: Mutation</h3>
+        <pre><code class="java">public class Mutation implements GraphQLRootResolver {
+    private final RandomDie randomDie;
+    public Mutation(RandomDie randomDie) {
+        this.randomDie = randomDie;
+    }
+    public Message createMessage(MessageInput input) { ... }
+}</code></pre>
+    </section>
+
+</section>
+
+
+<section>
+    <img src="img/graphql-trend.png" />
+</section>
+
+
+<section>
+  <h1>Thank you!</h1>
+  <h3>Q&A</h3>
 </section>
