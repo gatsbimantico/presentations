@@ -1,7 +1,23 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <base href="./">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=no">
+
+  <title>Presentation List</title>
+  <meta name="description" content="presentation-pwa-20171209 description">
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#DC143C">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#DC143C">
+  <meta name="msapplication-TileColor" content="#DC143C">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="crimson">
+
+  <link rel="manifest" href="./manifest.json">
+
   <link rel="stylesheet" href="css/reveal.css">
   <link rel="stylesheet" href="css/theme/moon.css">
   <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -37,10 +53,17 @@
           <li><a href="viewer.html#pwa">Progressive Web Apps</a></li>
           <li><a href="viewer.html#sota17q4">JavaScript: State Of The Art (2017 Q4)</a></li>
           <li><a href="viewer.html#graphql">GraphQL</a></li>
+          <li><a href="viewer.html#hash-tables">Hash Tables</a></li>
         </ol>
       </section>
     </div>
   </div>
+
+  <script>
+
+    navigator.serviceWorker.register('background-script.js').then(function (reg) { });
+
+  </script>
 </body>
 
 </html>

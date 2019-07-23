@@ -1,0 +1,20 @@
+{
+  "name": "presentation-pwa-20171209",
+  "short_name": "presentation-pwa-20171209",
+  "start_url": "/presentations",
+  "display": "standalone",
+  "background_color": "#DC143C",
+  "icons": [{
+    "src": "/presentations/tribal.png",
+    "type": "image/png",
+    "sizes": "144x144"
+  }],
+  "background": {
+    "scripts": ["background-script.js"]
+  },
+  "permissions": [
+    "notifications"
+  ],
+  "gcm_sender_id": "my_gcm_sender_id",
+  "gcm_user_visible_only": true
+}
